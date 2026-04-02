@@ -343,76 +343,43 @@ body {
   li::marker {
     color: var(--color-text-tertiary) !important;
   }
-
-  /* --------------------------------------------------------
-     10. Tables — Grouped inset style (終極修復版：儲存格拼圖法)
+/* --------------------------------------------------------
+     10. Tables — Grouped inset style
      -------------------------------------------------------- */
   table {
     width: 100% !important;
-    border-collapse: separate !important; /* 必須為 separate 才能個別設定圓角 */
+    border-collapse: separate !important;
     border-spacing: 0 !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden !important;
     margin: var(--space-lg) 0 !important;
     font-size: 15px !important;
-    border: none !important; /* 關鍵：移除 table 本身的 border 與 overflow */
-    border-radius: var(--radius-md) !important;
-    box-shadow: var(--shadow-sm) !important;
+    border: none !important;
+    box-shadow: var(--shadow-card) !important;
   }
 
-  /* 1. 所有儲存格的共用邊框 (一律畫右邊與下邊) */
-  th, td {
-    border-right: 1px solid var(--color-separator-opaque) !important;
-    border-bottom: 1px solid var(--color-separator-opaque) !important;
-  }
-
-  /* 2. 最左側的儲存格，補上左邊框 */
-  th:first-child, td:first-child {
-    border-left: 1px solid var(--color-separator-opaque) !important;
-  }
-
-  /* 3. 表頭專屬設定 (補上最上方的邊框) */
   th {
     background: var(--color-bg-secondary) !important;
     font-weight: 600 !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
     color: var(--color-text-secondary) !important;
     padding: var(--space-sm) var(--space-md) !important;
     text-align: left !important;
-    border-top: 1px solid var(--color-separator-opaque) !important; 
+    border: none !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
   }
 
-  /* 4. 一般儲存格設定 */
   td {
     padding: var(--space-sm) var(--space-md) !important;
+    border: none !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
     color: var(--color-text-primary) !important;
-    background: var(--color-bg-primary) !important; /* 確保背景色填滿，不漏空隙 */
   }
 
-  /* =======================================
-     5. 關鍵修復：針對四個角落個別導圓角
-     ======================================= */
-     
-  /* 左上角 */
-  tr:first-child th:first-child,
-  tr:first-child td:first-child {
-    border-top-left-radius: var(--radius-md) !important;
-  }
-
-  /* 右上角 */
-  tr:first-child th:last-child,
-  tr:first-child td:last-child {
-    border-top-right-radius: var(--radius-md) !important;
-  }
-
-  /* 左下角 */
-  tr:last-child td:first-child,
-  tr:last-child th:first-child {
-    border-bottom-left-radius: var(--radius-md) !important;
-  }
-
-  /* 右下角 */
-  tr:last-child td:last-child,
-  tr:last-child th:last-child {
-    border-bottom-right-radius: var(--radius-md) !important;
+  tr:last-child td {
+    border-bottom: none !important;
   }
   /* --------------------------------------------------------
      11. Tags — Pill-shaped, subtle fill
