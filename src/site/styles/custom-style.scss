@@ -1,13 +1,758 @@
+/* ============================================================
+   QuickRead — Apple HIG-Inspired Theme for Digital Garden
+   Version: 1.0.0
+   Design System: Apple Human Interface Guidelines (2024)
+   ============================================================
+
+   Design Principles:
+   - Clarity: Content is king. Typography drives hierarchy.
+   - Deference: UI recedes; content comes forward.
+   - Depth: Subtle layers via shadows & translucency.
+
+   Typography Scale (based on Apple SF system):
+   - Display:  34px / 41px line-height / -0.4px tracking
+   - Title 1:  28px / 34px / 0.36px
+   - Title 2:  22px / 28px / 0.35px
+   - Title 3:  20px / 25px / 0.38px
+   - Headline:  17px / 22px / -0.43px (semibold)
+   - Body:      17px / 25px / -0.43px
+   - Callout:   16px / 21px / -0.31px
+   - Footnote:  13px / 18px / -0.08px
+   - Caption:   12px / 16px / 0px
+   ============================================================ */
+
 body {
-    /***
-      ADD YOUR CUSTOM STYLING HERE. (INSIDE THE body {...} section.)
-      IT WILL TAKE PRECEDENCE OVER THE STYLING IN THE STYLE.CSS FILE.
-   ***/
-    //  background-color: white;
-    //  .content {
-    //   font-size: 14px;
-    //  }
-    //  h1 {
-    //   color: black;
-    //  }
-}
+
+  /* --------------------------------------------------------
+     0. CSS Custom Properties (Design Tokens)
+     -------------------------------------------------------- */
+  --font-family-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Noto Sans TC", "PingFang TC", sans-serif;
+  --font-family-mono: "SF Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+
+  /* Color — Light Palette (Apple System Colors) */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F2F2F7;
+  --color-bg-tertiary: #FFFFFF;
+  --color-bg-grouped: #F2F2F7;
+
+  --color-text-primary: #1D1D1F;
+  --color-text-secondary: #6E6E73;
+  --color-text-tertiary: #AEAEB2;
+  --color-text-quaternary: #C7C7CC;
+
+  --color-accent: #007AFF;
+  --color-accent-hover: #0056CC;
+
+  --color-separator: rgba(60, 60, 67, 0.12);
+  --color-separator-opaque: #C6C6C8;
+
+  --color-fill-primary: rgba(120, 120, 128, 0.2);
+  --color-fill-secondary: rgba(120, 120, 128, 0.16);
+  --color-fill-tertiary: rgba(120, 120, 128, 0.12);
+
+  /* Elevation (Apple-style subtle shadows) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 0.5px 1px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  /* Spacing (8pt grid) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Border Radius (Apple standard) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 980px;
+
+  /* Transitions (Apple-style spring-like) */
+  --transition-fast: 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-base: 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Content width */
+  --content-width: 720px;
+  --content-width-wide: 980px;
+
+  /* --------------------------------------------------------
+     1. Global Reset & Base
+     -------------------------------------------------------- */
+  font-family: var(--font-family-system) !important;
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  color: var(--color-text-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+
+  /* --------------------------------------------------------
+     2. Typography Hierarchy
+     -------------------------------------------------------- */
+
+  /* Page Title — Display style */
+  .cm-s-obsidian,
+  .markdown-rendered {
+    font-family: var(--font-family-system) !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  h1, .markdown-rendered h1 {
+    font-size: 34px !important;
+    line-height: 1.21 !important;
+    letter-spacing: -0.4px !important;
+    font-weight: 700 !important;
+    color: var(--color-text-primary) !important;
+    margin-top: var(--space-3xl) !important;
+    margin-bottom: var(--space-lg) !important;
+  }
+
+  h2, .markdown-rendered h2 {
+    font-size: 28px !important;
+    line-height: 1.21 !important;
+    letter-spacing: 0.36px !important;
+    font-weight: 700 !important;
+    color: var(--color-text-primary) !important;
+    margin-top: var(--space-2xl) !important;
+    margin-bottom: var(--space-md) !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+  }
+
+  h3, .markdown-rendered h3 {
+    font-size: 22px !important;
+    line-height: 1.27 !important;
+    letter-spacing: 0.35px !important;
+    font-weight: 600 !important;
+    color: var(--color-text-primary) !important;
+    margin-top: var(--space-xl) !important;
+    margin-bottom: var(--space-sm) !important;
+  }
+
+  h4, .markdown-rendered h4 {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.38px !important;
+    font-weight: 600 !important;
+    color: var(--color-text-primary) !important;
+    margin-top: var(--space-lg) !important;
+    margin-bottom: var(--space-sm) !important;
+  }
+
+  h5, h6 {
+    font-size: 17px !important;
+    line-height: 1.29 !important;
+    letter-spacing: -0.43px !important;
+    font-weight: 600 !important;
+    color: var(--color-text-primary) !important;
+    margin-top: var(--space-lg) !important;
+    margin-bottom: var(--space-xs) !important;
+  }
+
+  p, .markdown-rendered p {
+    font-size: 17px !important;
+    line-height: 1.47059 !important;
+    letter-spacing: -0.022em !important;
+    color: var(--color-text-primary) !important;
+    margin-bottom: var(--space-md) !important;
+  }
+
+  /* --------------------------------------------------------
+     3. Links — Accent color, no underline by default
+     -------------------------------------------------------- */
+  a {
+    color: var(--color-accent) !important;
+    text-decoration: none !important;
+    transition: color var(--transition-fast) !important;
+  }
+
+  a:hover {
+    color: var(--color-accent-hover) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+  }
+
+  /* Internal links (wiki-links) */
+  a.internal-link {
+    color: var(--color-accent) !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(0, 122, 255, 0.3) !important;
+    padding-bottom: 1px !important;
+    transition: all var(--transition-fast) !important;
+  }
+
+  a.internal-link:hover {
+    border-bottom-color: var(--color-accent) !important;
+    text-decoration: none !important;
+  }
+
+  /* --------------------------------------------------------
+     4. Navigation / Header
+     -------------------------------------------------------- */
+  .navbar,
+  nav,
+  header,
+  .site-header {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
+    padding: var(--space-sm) var(--space-lg) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+  }
+
+  .site-name,
+  .navbar .site-name,
+  .site-header a {
+    font-size: 21px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  /* --------------------------------------------------------
+     5. Content Container — Centered, generous whitespace
+     -------------------------------------------------------- */
+  .content,
+  .container,
+  .note-content,
+  main,
+  .main-content {
+    max-width: var(--content-width) !important;
+    margin: 0 auto !important;
+    padding: var(--space-2xl) var(--space-lg) !important;
+  }
+
+  @media (min-width: 768px) {
+    .content,
+    .container,
+    .note-content,
+    main,
+    .main-content {
+      padding: var(--space-3xl) var(--space-xl) !important;
+    }
+  }
+
+  /* --------------------------------------------------------
+     6. Cards & Backlinks — Grouped table-view style
+     -------------------------------------------------------- */
+  .backlinks,
+  .graph-view-wrapper,
+  .backlink-card {
+    background: var(--color-bg-secondary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-md) !important;
+    margin-top: var(--space-2xl) !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .backlinks h2,
+  .backlinks-title {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    color: var(--color-text-secondary) !important;
+    margin-bottom: var(--space-sm) !important;
+  }
+
+  .backlink-card,
+  .backlinks li {
+    background: var(--color-bg-tertiary) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    margin-bottom: 1px !important;
+    border: none !important;
+    transition: background var(--transition-fast) !important;
+  }
+
+  .backlink-card:hover,
+  .backlinks li:hover {
+    background: var(--color-fill-tertiary) !important;
+  }
+
+  /* --------------------------------------------------------
+     7. Code Blocks — Subtle, monospace
+     -------------------------------------------------------- */
+  code {
+    font-family: var(--font-family-mono) !important;
+    font-size: 15px !important;
+    background: var(--color-bg-secondary) !important;
+    color: var(--color-text-primary) !important;
+    padding: 2px 6px !important;
+    border-radius: 5px !important;
+    border: none !important;
+  }
+
+  pre, pre code {
+    font-family: var(--font-family-mono) !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    background: var(--color-bg-secondary) !important;
+    color: var(--color-text-primary) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: var(--space-md) !important;
+    border: none !important;
+    overflow-x: auto !important;
+  }
+
+  /* --------------------------------------------------------
+     8. Blockquotes — Left accent bar, Apple Notes style
+     -------------------------------------------------------- */
+  blockquote {
+    border-left: 3px solid var(--color-accent) !important;
+    background: transparent !important;
+    color: var(--color-text-secondary) !important;
+    padding: var(--space-xs) var(--space-md) !important;
+    margin: var(--space-md) 0 !important;
+    font-style: normal !important;
+  }
+
+  blockquote p {
+    color: var(--color-text-secondary) !important;
+  }
+
+  /* --------------------------------------------------------
+     9. Lists — Clean spacing
+     -------------------------------------------------------- */
+  ul, ol {
+    padding-left: var(--space-lg) !important;
+    margin-bottom: var(--space-md) !important;
+  }
+
+  li {
+    margin-bottom: var(--space-xs) !important;
+    line-height: 1.47059 !important;
+  }
+
+  li::marker {
+    color: var(--color-text-tertiary) !important;
+  }
+
+  /* --------------------------------------------------------
+     10. Tables — Grouped inset style
+     -------------------------------------------------------- */
+  table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden !important;
+    margin: var(--space-lg) 0 !important;
+    font-size: 15px !important;
+    border: none !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  th {
+    background: var(--color-bg-secondary) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    color: var(--color-text-secondary) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    text-align: left !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
+  }
+
+  td {
+    padding: var(--space-sm) var(--space-md) !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
+    color: var(--color-text-primary) !important;
+  }
+
+  tr:last-child td {
+    border-bottom: none !important;
+  }
+
+  /* --------------------------------------------------------
+     11. Tags — Pill-shaped, subtle fill
+     -------------------------------------------------------- */
+  .tag, a.tag, [class*="tag"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: var(--color-accent) !important;
+    background: rgba(0, 122, 255, 0.08) !important;
+    padding: 3px 10px !important;
+    border-radius: var(--radius-pill) !important;
+    border: none !important;
+    text-decoration: none !important;
+    transition: background var(--transition-fast) !important;
+    letter-spacing: 0 !important;
+    line-height: 1.38 !important;
+  }
+
+  .tag:hover, a.tag:hover {
+    background: rgba(0, 122, 255, 0.14) !important;
+    text-decoration: none !important;
+  }
+
+  /* --------------------------------------------------------
+     12. Images — Rounded, subtle shadow
+     -------------------------------------------------------- */
+  img {
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-card) !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* --------------------------------------------------------
+     13. Horizontal Rule — Thin separator
+     -------------------------------------------------------- */
+  hr {
+    border: none !important;
+    height: 0.5px !important;
+    background: var(--color-separator-opaque) !important;
+    margin: var(--space-2xl) 0 !important;
+  }
+
+  /* --------------------------------------------------------
+     14. Properties / Metadata — De-emphasized
+     -------------------------------------------------------- */
+  .properties,
+  .frontmatter,
+  .note-metadata {
+    font-size: 13px !important;
+    color: var(--color-text-tertiary) !important;
+    border-bottom: 0.5px solid var(--color-separator) !important;
+    padding-bottom: var(--space-md) !important;
+    margin-bottom: var(--space-xl) !important;
+  }
+
+  /* --------------------------------------------------------
+     15. Graph View — Minimal
+     -------------------------------------------------------- */
+  .graph-view-wrapper {
+    border-radius: var(--radius-md) !important;
+    overflow: hidden !important;
+  }
+
+  /* --------------------------------------------------------
+     16. Sidebar / File Explorer — Apple sidebar style
+     -------------------------------------------------------- */
+  .sidebar,
+  .filetree-sidebar {
+    background: var(--color-bg-secondary) !important;
+    border-right: 0.5px solid var(--color-separator) !important;
+    padding: var(--space-md) !important;
+  }
+
+  .sidebar a,
+  .filetree-sidebar a {
+    color: var(--color-text-primary) !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    padding: var(--space-xs) var(--space-sm) !important;
+    border-radius: 6px !important;
+    display: block !important;
+    transition: background var(--transition-fast) !important;
+  }
+
+  .sidebar a:hover,
+  .filetree-sidebar a:hover {
+    background: var(--color-fill-tertiary) !important;
+    text-decoration: none !important;
+  }
+
+  .sidebar a.is-active,
+  .filetree-sidebar a.is-active {
+    background: var(--color-accent) !important;
+    color: #FFFFFF !important;
+    font-weight: 500 !important;
+  }
+
+  /* --------------------------------------------------------
+     17. Search — Rounded search field
+     -------------------------------------------------------- */
+  input[type="search"],
+  input[type="text"],
+  .search-input {
+    font-family: var(--font-family-system) !important;
+    font-size: 17px !important;
+    background: var(--color-fill-tertiary) !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    color: var(--color-text-primary) !important;
+    outline: none !important;
+    transition: all var(--transition-fast) !important;
+    width: 100% !important;
+  }
+
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  .search-input:focus {
+    background: var(--color-bg-primary) !important;
+    box-shadow: 0 0 0 3.5px rgba(0, 122, 255, 0.3) !important;
+  }
+
+  input::placeholder {
+    color: var(--color-text-quaternary) !important;
+  }
+
+  /* --------------------------------------------------------
+     18. Buttons — Apple system button style
+     -------------------------------------------------------- */
+  button,
+  .btn,
+  [role="button"] {
+    font-family: var(--font-family-system) !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    color: var(--color-accent) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    cursor: pointer !important;
+    transition: all var(--transition-fast) !important;
+  }
+
+  button:hover,
+  .btn:hover {
+    background: var(--color-fill-tertiary) !important;
+  }
+
+  button:active,
+  .btn:active {
+    opacity: 0.7 !important;
+    transform: scale(0.98) !important;
+  }
+
+  /* Primary button */
+  .btn-primary,
+  button.primary {
+    background: var(--color-accent) !important;
+    color: #FFFFFF !important;
+    font-weight: 500 !important;
+    border-radius: var(--radius-pill) !important;
+    padding: var(--space-sm) var(--space-lg) !important;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent-hover) !important;
+  }
+
+  /* --------------------------------------------------------
+     19. Callouts / Admonitions — Rounded card style
+     -------------------------------------------------------- */
+  .callout,
+  [class*="callout"] {
+    background: var(--color-bg-secondary) !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-md) !important;
+    margin: var(--space-md) 0 !important;
+    box-shadow: none !important;
+  }
+
+  .callout-title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+  }
+
+  /* --------------------------------------------------------
+     20. Footnotes
+     -------------------------------------------------------- */
+  .footnotes {
+    font-size: 13px !important;
+    color: var(--color-text-secondary) !important;
+    border-top: 0.5px solid var(--color-separator) !important;
+    padding-top: var(--space-lg) !important;
+    margin-top: var(--space-3xl) !important;
+  }
+
+  /* --------------------------------------------------------
+     21. 404 / Empty State
+     -------------------------------------------------------- */
+  .not-found,
+  .empty-state,
+  .no-content {
+    text-align: center !important;
+    padding: var(--space-3xl) var(--space-lg) !important;
+    color: var(--color-text-secondary) !important;
+  }
+
+  .not-found h1,
+  .empty-state h1 {
+    font-size: 56px !important;
+    font-weight: 700 !important;
+    color: var(--color-text-primary) !important;
+    margin-bottom: var(--space-sm) !important;
+  }
+
+  .not-found p,
+  .empty-state p {
+    font-size: 17px !important;
+    color: var(--color-text-secondary) !important;
+    max-width: 460px !important;
+    margin: 0 auto !important;
+  }
+
+  /* --------------------------------------------------------
+     22. Selection
+     -------------------------------------------------------- */
+  ::selection {
+    background: rgba(0, 122, 255, 0.2) !important;
+    color: inherit !important;
+  }
+
+  /* --------------------------------------------------------
+     23. Scrollbar — Minimal (macOS-like)
+     -------------------------------------------------------- */
+  ::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-fill-primary) !important;
+    border-radius: var(--radius-pill) !important;
+    border: 2px solid transparent !important;
+    background-clip: content-box !important;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-quaternary) !important;
+    background-clip: content-box !important;
+  }
+
+  /* --------------------------------------------------------
+     24. Responsive Breakpoints
+     -------------------------------------------------------- */
+
+  /* Compact (iPhone) */
+  @media (max-width: 480px) {
+    h1, .markdown-rendered h1 {
+      font-size: 28px !important;
+    }
+
+    h2, .markdown-rendered h2 {
+      font-size: 22px !important;
+    }
+
+    h3, .markdown-rendered h3 {
+      font-size: 20px !important;
+    }
+
+    p, .markdown-rendered p {
+      font-size: 16px !important;
+    }
+
+    .content,
+    .container,
+    .note-content,
+    main,
+    .main-content {
+      padding: var(--space-lg) var(--space-md) !important;
+    }
+  }
+
+  /* Regular (iPad) */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    .content,
+    .container,
+    .note-content,
+    main,
+    .main-content {
+      padding: var(--space-2xl) var(--space-lg) !important;
+    }
+  }
+
+  /* --------------------------------------------------------
+     25. Print Styles
+     -------------------------------------------------------- */
+  @media print {
+    nav, .navbar, .sidebar, .graph-view-wrapper, .backlinks {
+      display: none !important;
+    }
+
+    body {
+      font-size: 12pt !important;
+      color: #000 !important;
+      background: #fff !important;
+    }
+
+    a {
+      color: #000 !important;
+      text-decoration: underline !important;
+    }
+  }
+
+  /* --------------------------------------------------------
+     26. Accessibility
+     -------------------------------------------------------- */
+
+  /* Focus visible — High contrast focus ring */
+  *:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3.5px rgba(0, 122, 255, 0.5) !important;
+    border-radius: 4px !important;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Dynamic type — respect user's font size preference */
+  @media (prefers-contrast: high) {
+    --color-text-primary: #000000;
+    --color-text-secondary: #3A3A3C;
+    --color-separator: rgba(60, 60, 67, 0.36);
+  }
+
+  /* --------------------------------------------------------
+     27. Micro-interactions
+     -------------------------------------------------------- */
+
+  /* Smooth page transitions */
+  .content,
+  main,
+  .main-content {
+    animation: fadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Interactive element feedback */
+  a, button, .tag, .backlink-card, .sidebar a {
+    transition: all var(--transition-fast) !important;
+  }
+
+} /* end body */
