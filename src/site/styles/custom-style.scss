@@ -1,3 +1,6 @@
+這是為您修改好的完整 CSS 代碼。我直接調整了 **10. Tables** 的區塊，透過純 CSS（不需修改 HTML 結構）解決了外框與圓角衝突的問題，同時加上了您截圖中需要的直向分隔線，並將線條統一改為 `1px` 與 `var(--color-separator-opaque)` 來確保所有裝置上都不會出現線條消失或破圖的情況：
+
+```css
 /* ============================================================
    QuickRead — Apple HIG-Inspired Theme for Digital Garden
    Version: 1.0.0
@@ -342,7 +345,7 @@ body {
   }
 
   /* --------------------------------------------------------
-     10. Tables — Grouped inset style
+     10. Tables — Grouped inset style (修復外框與圓角)
      -------------------------------------------------------- */
   table {
     width: 100% !important;
@@ -352,28 +355,38 @@ body {
     overflow: hidden !important;
     margin: var(--space-lg) 0 !important;
     font-size: 15px !important;
-    border: none !important;
-    box-shadow: var(--shadow-card) !important;
+    /* 加上明確的外邊框，確保表格整體包覆 */
+    border: 1px solid var(--color-separator-opaque) !important;
+    box-shadow: var(--shadow-sm) !important;
   }
 
   th {
     background: var(--color-bg-secondary) !important;
     font-weight: 600 !important;
-    font-size: 13px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.02em !important;
+    font-size: 14px !important;
     color: var(--color-text-secondary) !important;
     padding: var(--space-sm) var(--space-md) !important;
     text-align: left !important;
-    border-bottom: 0.5px solid var(--color-separator) !important;
+    /* 內部底線與右側垂直分隔線 */
+    border-bottom: 1px solid var(--color-separator-opaque) !important;
+    border-right: 1px solid var(--color-separator-opaque) !important;
   }
 
   td {
     padding: var(--space-sm) var(--space-md) !important;
-    border-bottom: 0.5px solid var(--color-separator) !important;
+    /* 內部底線與右側垂直分隔線 */
+    border-bottom: 1px solid var(--color-separator-opaque) !important;
+    border-right: 1px solid var(--color-separator-opaque) !important;
     color: var(--color-text-primary) !important;
   }
 
+  /* 關鍵修復 1：移除最右側的邊線，避免跟 table 外邊框重疊變粗 */
+  th:last-child,
+  td:last-child {
+    border-right: none !important;
+  }
+
+  /* 關鍵修復 2：移除最底部的邊線，解決底部消失/破圖的問題 */
   tr:last-child td {
     border-bottom: none !important;
   }
@@ -756,3 +769,4 @@ body {
   }
 
 } /* end body */
+```
