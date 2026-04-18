@@ -81,7 +81,7 @@ Foundation files 是放在專案 `/foundation/` 資料夾下的 `.md` 檔。Clau
 
 ### [EN] Code Example — Audit Foundation Files Skill
 
-```markdown
+```text
 # Skill: Audit Foundation Files
 
 ## Steps
@@ -125,7 +125,7 @@ Keep it under 60 lines. [HumanLayer's research](https://humanlayer.dev/blog/writ
 
 ### [EN] Code Example — CLAUDE.md Template (marketing leader)
 
-```markdown
+```text
 # CLAUDE.md
 
 ## Who I am
@@ -302,7 +302,7 @@ Run **Find Skills** every Friday. In a month you'll have a system that surfaces 
 
 ### [EN] Code Example — Weekly Pipeline Review Skill
 
-```markdown
+```text
 # Skill: Weekly Pipeline Review
 
 ## When to use
@@ -332,7 +332,7 @@ and where to focus this week.
 
 ### [EN] Code Example — End of Session Brief Skill
 
-```markdown
+```text
 # Skill: End of Session Brief
 
 ## When to use
@@ -357,7 +357,7 @@ Run before closing Claude Code at the end of any working session.
 
 ### [EN] Code Example — Find Skills Skill
 
-```markdown
+```text
 # Skill: Find Skills
 
 ## When to use
